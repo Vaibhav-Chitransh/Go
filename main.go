@@ -2,7 +2,11 @@ package main
 
 // go mod init folder name for initialization (in our case it is go mod init Go)
 
-import "fmt"  // collection of source files like Print
+// fmt -> collection of source files like Print
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	// fmt.Print("Hello");  // use Prinln for new line
@@ -63,4 +67,34 @@ func main() {
 	fmt.Printf("The whole slice: %v\n", dynamicBookings)
 	fmt.Printf("Slice type %T\n", dynamicBookings)
 	fmt.Printf("Slice length %v\n", len(dynamicBookings))
+
+	// loops in go (only for loop is there in go)
+
+	// for {
+	// 	// whatever inside get's repeated until break is called
+	// 	fmt.Println("This is an infinite loop")
+	// }
+
+	firstNames := []string{}
+	for _, booking := range dynamicBookings {
+		var names = strings.Fields(booking)
+		var firstName = names[0]
+		firstNames = append(firstNames, firstName)
+	}
+
+	fmt.Printf("The first names of our bookings are: %v\n", firstNames)
+
+	// if-else in go
+
+	var age uint
+	fmt.Println("Enter you age: ")
+	fmt.Scan(&age)
+
+	if age < 18 {
+		fmt.Println("You are not eligible to attend the conference")
+	} else if age >= 18 && age <= 60 {
+		fmt.Println("You are eligible to attend the conference")
+	} else {
+		fmt.Println("You are not eligible to attend the conference")
+	}
 }
