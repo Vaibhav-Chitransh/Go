@@ -2,17 +2,28 @@ package main
 
 // go mod init folder name for initialization (in our case it is go mod init Go)
 
-// fmt -> collection of source files like Print
+// fmt -> collection of source files like Print, Scan, Printf, Println, etc
+// strings -> collection of source files like Contains, Fields, etc
 import (
 	"fmt"
 	"strings"
 )
 
-func main() {
-	// fmt.Print("Hello");  // use Prinln for new line
-	var conferenceName = "Go Conference"   
-	// short form conferenceName := "Go Conference"  // use := for short form of var  (but can't use for constant values)
+var conferenceName = "Go Conference" 
 
+func greet(firstName string) {
+	fmt.Printf("Hello %v, Welcome to the %v\n", firstName, conferenceName)
+}
+
+func validateInput(firstName string, lastName string, email string) (bool, bool) {
+	isValidName := len(firstName) >= 2 && len(lastName) >= 2
+	isValidEmail := strings.Contains(email, "@")
+	return isValidName, isValidEmail   // can return multiple values in go
+}
+
+func main() {
+	// fmt.Print("Hello");  // use Prinln for new line  
+	// short form conferenceName := "Go Conference"  // use := for short form of var  (but can't use for constant values)
 	const conferenceTickets = 50  // use const for constant values
 	var remainingTickets uint = 50  // use uint if you don't want negative values
 
@@ -43,6 +54,10 @@ func main() {
 	
 	fmt.Println("Enter number of tickets you want to book: ")
 	fmt.Scan(&userTickets)
+
+	// user input validation
+	isValidName, isValidEmail := validateInput(firstName, lastName, email)
+	fmt.Println(isValidName, isValidEmail)
 	
 	remainingTickets = remainingTickets - userTickets
 	
@@ -97,4 +112,7 @@ func main() {
 	} else {
 		fmt.Println("You are not eligible to attend the conference")
 	}
+
+	// Functions in Go
+	greet(firstName)
 }
